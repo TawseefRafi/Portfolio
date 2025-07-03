@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The portfolio of Tawseef Salim Rafi, a passionate Electrical Engineering undergraduate specializing in AI/ML, embedded systems, and sustainable energy solutions.">
+    <meta name="keywords" content="Tawseef Salim Rafi, Electrical Engineering, Portfolio, AI, ML, Embedded Systems, IoT, TENG, Sustainable Energy, Web Developer">
+    <title>Tawseef Salim Rafi - Interactive Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --bg-card: #14213D;
+            --accent: #FCA311;
+            --text-light: #E5E5E5;
+            --text-highlight: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            cursor: none;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(252, 163, 17, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        a.glass-card:hover { /* Specificity for anchor tags with glass-card class */
+            background: #1f3562;
+            border: 1px solid rgba(252, 163, 17, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-width 0.2s;
+            z-index: 9999;
+        }
+
+        .cursor-grow {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(252, 163, 17, 0.3);
+            border-width: 1px;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title i {
+            margin-right: 0.75rem;
+        }
+        
+        /* Horizontal Scroll Container */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+    </style>
+</head>
+<body class="bg-black text-platinum">
+
+    <div class="cursor"></div>
+
+    <header class="bg-transparent fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="text-2xl font-bold text-white hover:text-accent-orange transition-colors">Tawseef Salim Rafi</a>
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#achievements" class="nav-link">Achievements</a>
+                    <a href="#certifications" class="nav-link">Certifications</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="CV Formal.pdf" target="_blank" class="resume-btn">View Resume</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-sm">
+            <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">About</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Education</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Experience</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Projects</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Skills</a>
+                <a href="#achievements" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Achievements</a>
+                <a href="#certifications" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Certifications</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-platinum hover:text-white hover:bg-oxford-blue">Contact</a>
+                <a href="CV Formal.pdf" target="_blank" class="block mt-2 w-full text-center px-3 py-2 rounded-md text-base font-medium text-black bg-accent-orange hover:bg-orange-500">View Resume</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="about" class="section">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6 reveal">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Hi, I'm <span class="text-accent-orange">Tawseef Salim Rafi</span></h1>
+                    <p class="text-lg md:text-xl text-gray-400">
+                        I'm a motivated Electrical Engineering undergraduate passionate about innovation and technology. With a focus on TENG, wearables, embedded systems, and IoT, I integrate AI/ML to advance sustainable energy solutions. I leverage Finite Element Modeling (FEM) for optimized design and performance, driven by hands-on projects and a commitment to pushing technological boundaries.
+                    </p>
+                </div>
+                <div class="flex justify-center items-center reveal" style="transition-delay: 200ms;">
+                    <img src="images/my-photo.jpg" alt="A portrait of Tawseef Salim Rafi" class="rounded-full w-72 h-72 md:w-80 md:h-80 object-cover border-4 border-accent-orange shadow-lg shadow-accent-orange/20">
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <div class="space-y-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-graduation-cap"></i>Education</h2>
+                <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-oxford-blue md:before:mx-auto md:before:left-0 md:before:right-0">
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-university"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">B.Sc. Electrical and Electronic Engineering</h3><time class="font-medium text-accent-orange">2022 - Present</time></div>
+                            <p class="text-sm font-semibold text-gray-400">Khulna University of Engineering & Technology | Khulna</p>
+                            <p class="mt-2 text-gray-400">CGPA: 3.96/4.00</p>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-school"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Higher Secondary Certificate (HSC)</h3><time class="font-medium text-accent-orange">2018 - 2020</time></div>
+                            <p class="text-sm font-semibold text-gray-400">Notre Dame College | Dhaka</p>
+                            <p class="mt-2 text-gray-400">GPA: 5.00/5.00 (Science)</p>
+                        </div>
+                    </div>
+                     <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-school"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Secondary School Certificate (SSC)</h3><time class="font-medium text-accent-orange">2008 - 2018</time></div>
+                            <p class="text-sm font-semibold text-gray-400">Government Laboratory High School | Dhaka</p>
+                            <p class="mt-2 text-gray-400">GPA: 5.00/5.00 (Science)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="space-y-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-briefcase"></i>My Experience</h2>
+                <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-oxford-blue md:before:mx-auto md:before:left-0 md:before:right-0">
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-users"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Public Relations Coordinator</h3><time class="font-medium text-accent-orange">Nov 2022 - Present</time></div>
+                            <p class="text-sm font-semibold text-gray-400">EEE Makers Hub, KUET | Khulna</p>
+                            <ul class="mt-2 text-gray-400 list-disc list-inside">
+                                <li>Organised 5+ flagship events.</li>
+                                <li>Collaborated on member recruitments and event plan drafts.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-bullhorn"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Campus Ambassador</h3><time class="font-medium text-accent-orange">2023</time></div>
+                            <p class="text-sm font-semibold text-gray-400">RUET EEE Day, RUET | Rajshahi</p>
+                            <ul class="mt-2 text-gray-400 list-disc list-inside">
+                                <li>Finished 10+ tasks.</li>
+                                <li>Promoted events across several platforms.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-calculator"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Executive Member</h3><time class="font-medium text-accent-orange">2024</time></div>
+                            <p class="text-sm font-semibold text-gray-400">NDC Math Club, NDC | Dhaka</p>
+                            <ul class="mt-2 text-gray-400 list-disc list-inside">
+                                <li>Enhanced the Math Club management process.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-accent-orange text-black group-hover:scale-110 transition-transform duration-300 shrink-0 md:order-1 md:mx-auto shadow-md shadow-accent-orange/50"><i class="fas fa-flask"></i></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-lg shadow-lg">
+                            <div class="flex items-center justify-between space-x-2 mb-1"><h3 class="font-bold text-white text-lg">Executive Member</h3><time class="font-medium text-accent-orange">2024</time></div>
+                            <p class="text-sm font-semibold text-gray-400">Science Club of Laboratorians, GLAB | Dhaka</p>
+                            <ul class="mt-2 text-gray-400 list-disc list-inside">
+                                <li>Organised 1 science fair.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="space-y-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-code"></i>Featured Projects</h2>
+                <div class="relative reveal">
+                    <div id="projects-scroll" class="scroll-container space-x-8 pb-4">
+                        <!-- Project Card 1 -->
+                        <a href="https://github.com/TawseefRafi/Simulink-model-of-PV-system" target="_blank" class="glass-card rounded-lg overflow-hidden group w-[350px] flex-shrink-0 block">
+                            <img src="images\PV System.jpg" alt="Simulink Model of PV system" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col h-full">
+                                <h3 class="text-xl font-bold text-white mb-2">Simulink Model of PV system</h3>
+                                <p class="text-gray-400 mb-4 flex-grow">Developed a working simulation model of a Solar cell using Matlab.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="tech-tag">Matlab</span><span class="tech-tag">Simulink</span>
+                                </div>
+                                <div class="flex justify-end space-x-4"><span class="project-link">Explore Project</span></div>
+                            </div>
+                        </a>
+                        <!-- Project Card 2 -->
+                        <a href="https://github.com/TawseefRafi/Heart_Disease_Prediction" target="_blank" class="glass-card rounded-lg overflow-hidden group w-[350px] flex-shrink-0 block">
+                            <img src="images\Heart-Disease.jpg" alt="Heart Disease Prediction" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col h-full">
+                                <h3 class="text-xl font-bold text-white mb-2">Heart Disease Prediction</h3>
+                                <p class="text-gray-400 mb-4 flex-grow">Built a predictive ML model to detect heart diseases.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="tech-tag">Python</span><span class="tech-tag">Jupyter Notebook</span>
+                                </div>
+                                <div class="flex justify-end space-x-4"><span class="project-link">Explore Project</span></div>
+                            </div>
+                        </a>
+                        <!-- Project Card 3 -->
+                        <a href="https://github.com/TawseefRafi/Detection-of-Cardiac-Abnormalities-Using-ECG-Signals" target="_blank" class="glass-card rounded-lg overflow-hidden group w-[350px] flex-shrink-0 block">
+                            <img src="images\Cardiac-Abnormality.jpg" alt="Detection of Cardiac Abnormalities" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col h-full">
+                                <h3 class="text-xl font-bold text-white mb-2">Detection of Cardiac Abnormalities</h3>
+                                <p class="text-gray-400 mb-4 flex-grow">Designed an ML model to detect Cardiac Abnormalities in ECG Signals.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="tech-tag">Python</span><span class="tech-tag">Jupyter Notebook</span>
+                                </div>
+                                <div class="flex justify-end space-x-4"><span class="project-link">Explore Project</span></div>
+                            </div>
+                        </a>
+                        <!-- Project Card 4 -->
+                        <a href="https://blitz-wear.vercel.app/" target="_blank" class="glass-card rounded-lg overflow-hidden group w-[350px] flex-shrink-0 block">
+                            <img src="images\Blitz-Wear.jpg" alt="Blitzz Wear" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col h-full">
+                                <h3 class="text-xl font-bold text-white mb-2">Blitzz Wear</h3>
+                                <p class="text-gray-400 mb-4 flex-grow">Built a responsive e-commerce platform for niche apparel, streamlining inventory management.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="tech-tag">E-commerce</span>
+                                </div>
+                                <div class="flex justify-end space-x-4"><span class="project-link">View Live</span></div>
+                            </div>
+                        </a>
+                        <!-- Project Card 5 -->
+                         <a href="https://github.com/TawseefRafi/Movie-Recommendation-System" target="_blank" class="glass-card rounded-lg overflow-hidden group w-[350px] flex-shrink-0 block">
+                            <img src="images\Movie-recommendation.jpg" alt="Movie Recommendation System" class="w-full h-48 object-cover">
+                            <div class="p-6 flex flex-col h-full">
+                                <h3 class="text-xl font-bold text-white mb-2">Movie Recommendation System</h3>
+                                <p class="text-gray-400 mb-4 flex-grow">Built a dynamic movie recommendation system for your preferred movie-series.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="tech-tag">Python</span><span class="tech-tag">Jupyter Notebook</span>
+                                </div>
+                                <div class="flex justify-end space-x-4"><span class="project-link">Explore Project</span></div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Scroll Buttons -->
+                    <button id="scroll-left-projects" class="scroll-btn left-0"><i class="fas fa-chevron-left"></i></button>
+                    <button id="scroll-right-projects" class="scroll-btn right-0"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="space-y-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-cogs"></i>Technical Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full">
+                    <div class="glass-card p-6 rounded-lg shadow-lg reveal">
+                        <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-code"></i> Languages</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag">Python</span><span class="tech-tag">C</span><span class="tech-tag">C++</span><span class="tech-tag">Arduino</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg shadow-lg reveal" style="transition-delay: 100ms;">
+                        <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-tools"></i> Software</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag">MATLAB</span><span class="tech-tag">Proteus</span><span class="tech-tag">PSpice</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg shadow-lg reveal" style="transition-delay: 200ms;">
+                        <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-robot"></i> ML Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag">TensorFlow</span><span class="tech-tag">PyTorch</span><span class="tech-tag">Pandas</span><span class="tech-tag">Scikit-learn</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg shadow-lg reveal" style="transition-delay: 300ms;">
+                        <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-desktop"></i> Dev Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag">VS Code</span><span class="tech-tag">Figma</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg shadow-lg reveal md:col-span-2" style="transition-delay: 400ms;">
+                        <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-lightbulb"></i> Concepts</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag">Machine Learning</span><span class="tech-tag">Circuit Design</span><span class="tech-tag">Circuit Simulation</span><span class="tech-tag">Image Processing</span><span class="tech-tag">PCB Layout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <section id="achievements" class="section">
+            <div class="space-y-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-trophy"></i>Achievements</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="glass-card p-8 rounded-lg shadow-lg reveal">
+                        <ul class="space-y-4 text-lg text-gray-300">
+                            <li class="flex items-start"><span class="text-accent-orange mr-4"><i class="fas fa-award"></i></span> Dean's Award, Khulna University of Engineering & Technology</li>
+                            <li class="flex items-start"><span class="text-accent-orange mr-4"><i class="fas fa-award"></i></span> Champion in IEEE ProCon Idea Pitching (2024)</li>
+                            <li class="flex items-start"><span class="text-accent-orange mr-4"><i class="fas fa-award"></i></span> 3rd in Language Competition regional stage</li>
+                            <li class="flex items-start"><span class="text-accent-orange mr-4"><i class="fas fa-award"></i></span> Several Science Olympiad winners in School and College</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <div class="space-y-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white reveal section-title"><i class="fas fa-certificate"></i>Certifications</h2>
+                <div class="relative reveal">
+                    <div id="certs-scroll" class="scroll-container space-x-8 pb-4">
+                        <!-- Cert Card 1 -->
+                        <div class="glass-card p-6 rounded-lg shadow-lg w-[350px] flex-shrink-0">
+                            <h3 class="text-xl font-bold text-white mb-2">Excel</h3>
+                            <p class="text-gray-400 mb-4">Coursera Project Network (2024)</p>
+                            <a href="https://www.coursera.org/account/accomplishments/verify/KP3WFWF6NFAQ" target="_blank" class="project-link">View Credential</a>
+                        </div>
+                        <!-- Cert Card 2 -->
+                        <div class="glass-card p-6 rounded-lg shadow-lg w-[350px] flex-shrink-0">
+                            <h3 class="text-xl font-bold text-white mb-2">Venture Capital</h3>
+                            <p class="text-gray-400 mb-4">Wall Street Oasis (2025)</p>
+                            <a href="https://www.wallstreetoasis.com/certificate/634859-1362521" target="_blank" class="project-link">View Credential</a>
+                        </div>
+                        <!-- Cert Card 3 -->
+                        <div class="glass-card p-6 rounded-lg shadow-lg w-[350px] flex-shrink-0">
+                            <h3 class="text-xl font-bold text-white mb-2">Building Systems</h3>
+                            <p class="text-gray-400 mb-4">DeepLearning.AI (2025)</p>
+                            <a href="https://learn.deeplearning.ai/accomplishments/128e2542-b89e-453a-82f1-147453644f25?usp=sharing" target="_blank" class="project-link">View Credential</a>
+                        </div>
+                        <!-- Cert Card 4 -->
+                        <div class="glass-card p-6 rounded-lg shadow-lg w-[350px] flex-shrink-0">
+                            <h3 class="text-xl font-bold text-white mb-2">Vibe Coding</h3>
+                            <p class="text-gray-400 mb-4">DeepLearning.AI (2025)</p>
+                            <a href="https://learn.deeplearning.ai/accomplishments/9939d0bd-621a-4a40-b90b-627de3974405?usp=sharing" target="_blank" class="project-link">View Credential</a>
+                        </div>
+                    </div>
+                     <!-- Scroll Buttons -->
+                    <button id="scroll-left-certs" class="scroll-btn left-0"><i class="fas fa-chevron-left"></i></button>
+                    <button id="scroll-right-certs" class="scroll-btn right-0"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-transparent">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+                <div class="reveal">
+                    <h2 class="text-3xl font-bold text-white mb-4 section-title"><i class="fas fa-envelope"></i>Get In Touch</h2>
+                    <p class="text-gray-400 max-w-md mx-auto mb-8">
+                        I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!
+                    </p>
+                    <a href="mailto:tawseefrafi@gmail.com" class="contact-btn">Contact Me</a>
+                </div>
+                
+                <div class="max-w-xl mx-auto mt-12 reveal">
+                    <h3 class="text-2xl font-bold text-white mb-6">Feedback</h3>
+                    <form id="feedbackForm" class="space-y-4">
+                        <input type="email" name="email" placeholder="Your Email (Optional)" class="w-full p-3 rounded-lg bg-oxford-blue text-white border border-accent-orange/20 focus:ring-2 focus:ring-accent-orange focus:outline-none">
+                        <textarea name="feedback" rows="4" placeholder="Have any feedback on my portfolio?" class="w-full p-3 rounded-lg bg-oxford-blue text-white border border-accent-orange/20 focus:ring-2 focus:ring-accent-orange focus:outline-none" required></textarea>
+                        <button type="submit" class="contact-btn">Submit Feedback</button>
+                    </form>
+                    <p id="form-message" class="mt-4 text-accent-orange"></p>
+                </div>
+
+                <div class="flex justify-center space-x-6 mt-12 reveal">
+                     <a href="mailto:tawseefrafi@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                     <a href="https://www.linkedin.com/in/tawseef-salim-rafi/" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                     <a href="https://github.com/TawseefRafi" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="border-t border-white/10 mt-12 pt-6 reveal">
+                    <p class="text-gray-500 text-sm">© 2024 Tawseef Salim Rafi. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'oxford-blue': '#14213D',
+            'accent-orange': '#FCA311',
+            'platinum': '#E5E5E5',
+          }
+        }
+      }
+    }
+    
+    function applyStyles() {
+        const styles = {
+            '.nav-link': 'text-platinum hover:text-accent-orange transition-colors duration-300 relative after:content-[""] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 after:bg-accent-orange after:transition-all after:duration-300 hover:after:w-full',
+            '.resume-btn': 'bg-accent-orange hover:bg-orange-500 text-black font-medium py-2 px-4 rounded-lg transition-all duration-300 shadow-lg shadow-accent-orange/20 hover:shadow-orange-500/40 transform hover:scale-105',
+            '.social-link': 'text-gray-400 hover:text-accent-orange transition-all duration-300 transform hover:-translate-y-1 text-2xl',
+            '.project-link': 'text-accent-orange hover:text-orange-300 font-medium transition-colors duration-300',
+            '.tech-tag': 'bg-black/30 text-accent-orange text-xs font-medium px-2.5 py-1 rounded-full border border-accent-orange/30',
+            '.contact-btn': 'inline-block bg-accent-orange hover:bg-orange-500 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300 text-lg shadow-lg shadow-accent-orange/30 hover:shadow-orange-500/50 transform hover:scale-105',
+            '.scroll-btn': 'absolute top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-accent-orange hover:text-black transition-all duration-300 z-10 hidden md:block'
+        };
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = Object.entries(styles).map(([selector, rules]) => `${selector} { @apply ${rules}; }`).join('\n');
+        document.head.appendChild(styleSheet);
+    }
+    applyStyles();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        const cursor = document.querySelector('.cursor');
+        const interactiveElements = document.querySelectorAll('a, button');
+        window.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('bg-black/80', window.scrollY > 50);
+            header.classList.toggle('backdrop-blur-sm', window.scrollY > 50);
+            header.classList.toggle('shadow-lg', window.scrollY > 50);
+        });
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        // Scroll functionality
+        function setupScroller(containerId, leftBtnId, rightBtnId) {
+            const container = document.getElementById(containerId);
+            const leftBtn = document.getElementById(leftBtnId);
+            const rightBtn = document.getElementById(rightBtnId);
+            const scrollAmount = 370; // width of card + gap
+
+            if(container && leftBtn && rightBtn) {
+                leftBtn.addEventListener('click', () => container.scrollLeft -= scrollAmount);
+                rightBtn.addEventListener('click', () => container.scrollLeft += scrollAmount);
+            }
+        }
+
+        setupScroller('projects-scroll', 'scroll-left-projects', 'scroll-right-projects');
+        setupScroller('certs-scroll', 'scroll-left-certs', 'scroll-right-certs');
+
+        const feedbackForm = document.getElementById('feedbackForm');
+        const formMessage = document.getElementById('form-message');
+        feedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formMessage.textContent = 'Thank you for your feedback!';
+            feedbackForm.reset();
+            setTimeout(() => formMessage.textContent = '', 3000);
+        });
+    });
+    </script>
+</body>
+</html>
